@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Open Java Rank</string>
+    <string name="navigation_drawer_header_title" translatable="false">Open Java Rank</string>
+    <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">Repos</string>
+    <string name="navigation_drawer_header_content_description" translation_description="Content description for the image that is shown at the top of the navigation drawer.">Navigation drawer header logo</string>
+    <string name="unknown_error">Tivemos um problema</string>
+    <string name="loram_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a sodales leo. Cras tristique velit.</string>
+</resources>
