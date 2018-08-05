@@ -3,46 +3,48 @@ package com.ericmguimaraes.openjavarank
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.ericmguimaraes.openjavarank.adapters.RepoAdapter
+import com.ericmguimaraes.openjavarank.adapters.PullRequestsAdapter
 import com.ericmguimaraes.openjavarank.binding.FragmentDataBindingComponent
-import com.ericmguimaraes.openjavarank.databinding.FragmentRepoListBinding
+import com.ericmguimaraes.openjavarank.databinding.FragmentPrListBinding
 import com.ericmguimaraes.openjavarank.utilities.AppExecutors
 import com.ericmguimaraes.openjavarank.utilities.InjectorUtils
 import com.ericmguimaraes.openjavarank.utilities.autoCleared
-import com.ericmguimaraes.openjavarank.viewmodels.RepoListViewModel
-import timber.log.Timber
+import com.ericmguimaraes.openjavarank.viewmodels.PullRequestListViewModel
 
-class RepoFragment : Fragment() {
+class PullRequestFragment : Fragment() {
 
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var repoViewModel: RepoListViewModel
+    lateinit var prsViewModel: PullRequestListViewModel
 
     lateinit var appExecutors: AppExecutors
 
     // mutable for testing
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<FragmentRepoListBinding>()
+    var binding by autoCleared<FragmentPrListBinding>()
 
-    private var adapter by autoCleared<RepoAdapter>()
+    private var adapter by autoCleared<PullRequestsAdapter>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModelFactory = InjectorUtils.provideRepoListViewModelFactory(requireContext())!!
+        viewModelFactory = InjectorUtils.providePullRequestListViewModelFactory(requireContext())!!
         appExecutors = InjectorUtils.provideAppExecutors()
-        repoViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(RepoListViewModel::class.java)
+        prsViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(PullRequestListViewModel::class.java)
+        val params = PullRequestFragmentArgs.fromBundle(arguments)
+        prsViewModel.setId(params.owner, params.name)
 
-        val repositories = repoViewModel.repositories
+        val repositories = prsViewModel.pulls
         repositories.observe(this, Observer { resource ->
             Log.e("STATUSRESC", resource?.status?.name)
             Log.e("STATUSRESC", "${resource?.data?.isEmpty()}")
@@ -51,18 +53,20 @@ class RepoFragment : Fragment() {
             binding.contributorsStatus = resource?.status
         })
 
-        val adapter = RepoAdapter(dataBindingComponent, appExecutors) { repo ->
-            navController().navigate(
-                    RepoFragmentDirections.showPrs(repo.owner.login, repo.name)
-            )
+        val adapter = PullRequestsAdapter(dataBindingComponent, appExecutors) { pull ->
+            val url = pull.htmlUrl
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
         this.adapter = adapter
         binding.repoList.adapter = adapter
-        initRepoList(repoViewModel)
+        initPullsList(prsViewModel)
     }
 
-    private fun initRepoList(viewModel: RepoListViewModel) {
-        viewModel.repositories.observe(this, Observer { listResource ->
+    private fun initPullsList(viewModel: PullRequestListViewModel) {
+        viewModel.pulls.observe(this, Observer { listResource ->
             if (listResource?.data != null) {
                 adapter.submitList(listResource.data)
             } else {
@@ -75,19 +79,14 @@ class RepoFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val dataBinding = DataBindingUtil.inflate<FragmentRepoListBinding>(
+        val dataBinding = DataBindingUtil.inflate<FragmentPrListBinding>(
                 inflater,
-                R.layout.fragment_repo_list,
+                R.layout.fragment_pr_list,
                 container,
                 false
         )
         binding = dataBinding
         return dataBinding.root
     }
-
-    /**
-     * Created to be able to override in tests
-     */
-    fun navController() = findNavController()
 
 }

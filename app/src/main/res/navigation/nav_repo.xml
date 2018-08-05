@@ -23,23 +23,29 @@
    <fragment
         android:id="@+id/repo_fragment"
         android:name="com.ericmguimaraes.openjavarank.RepoFragment"
-        android:label="@string/my_garden_title"
-        tools:layout="@layout/fragment_repo_list" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_repo_list" >
+      <action
+          android:id="@+id/showPrs"
+          destination="@+id/prsFragment"
+          app:destination="@id/prsFragment"
+          app:enterAnim="@anim/slide_in_right"
+          app:exitAnim="@anim/slide_out_left"
+          app:popEnterAnim="@anim/slide_in_left"
+          app:popExitAnim="@anim/slide_out_right"
+          />
+   </fragment>
 
-    <!--
-        <fragment
-            android:id="@+id/plant_list_fragment"
-            android:name="com.google.samples.apps.sunflower.PlantListFragment"
-            android:label="@string/plant_list_title"
-            tools:layout="@layout/fragment_plant_list">
-
-            <action
-                android:id="@+id/action_plant_list_fragment_to_plant_detail_fragment"
-                app:destination="@id/plant_detail_fragment"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
-        </fragment>-->
+   <fragment
+       android:id="@+id/prsFragment"
+       android:name="com.ericmguimaraes.openjavarank.PullRequestFragment"
+       android:label="Pull Requests" >
+      <argument
+          android:name="owner"
+          app:argType="string" />
+      <argument
+          android:name="name"
+          app:argType="string" />
+   </fragment>
 
 </navigation>

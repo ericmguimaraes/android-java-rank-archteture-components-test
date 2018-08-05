@@ -15,10 +15,8 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/repo_fragment"
-        android:title="@string/repos_title"/>
-
-</menu>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:fromXDelta="100%" android:toXDelta="0%"
+        android:fromYDelta="0%" android:toYDelta="0%"
+        android:duration="400"/>
+</set>

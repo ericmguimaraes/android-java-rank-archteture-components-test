@@ -17,6 +17,6 @@ interface RepoDao {
     fun getRepo(repoId: String): LiveData<Repo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(plants: List<Repo>)
+    fun insertAll(repos: List<Repo>)
 
 }

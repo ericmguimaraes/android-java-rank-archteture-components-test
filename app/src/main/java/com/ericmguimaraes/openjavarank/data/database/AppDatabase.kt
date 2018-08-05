@@ -21,17 +21,20 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.ericmguimaraes.openjavarank.data.daos.PullRequestDao
 import com.ericmguimaraes.openjavarank.data.daos.RepoDao
+import com.ericmguimaraes.openjavarank.data.model.PullRequest
 import com.ericmguimaraes.openjavarank.data.model.Repo
 import com.ericmguimaraes.openjavarank.utilities.DATABASE_NAME
 
 /**
  * The Room database for this app
  */
-@Database(entities = [Repo::class], version = 4, exportSchema = false)
+@Database(entities = [Repo::class, PullRequest::class], version = 6, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun repoDao(): RepoDao
+    abstract fun pullRequestDao(): PullRequestDao
 
     companion object {
 

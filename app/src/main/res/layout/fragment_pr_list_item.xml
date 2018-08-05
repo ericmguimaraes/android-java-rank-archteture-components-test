@@ -8,8 +8,8 @@
         <import type="java.lang.Integer" />
 
         <variable
-            name="repo"
-            type="com.ericmguimaraes.openjavarank.data.model.Repo" />
+            name="pr"
+            type="com.ericmguimaraes.openjavarank.data.model.PullRequest" />
 
     </data>
 
@@ -32,14 +32,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/text_margin"
                 android:layout_marginTop="@dimen/text_margin"
-                android:text="@{repo.name}"
+                android:text="@{pr.title}"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 tools:text="Repo Name Big" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{repo.description}"
+                android:text="@{pr.body}"
                 android:textAppearance="?attr/textAppearanceListItem"
                 tools:text="@string/loram_ipsum" />
 
@@ -62,37 +62,14 @@
                         android:contentDescription="User profile"
                         android:scaleType="centerCrop"
                         android:src="@drawable/octocat"
-                        app:imageUrl="@{repo.owner.aravatUrl}" />
+                        app:imageUrl="@{pr.user.aravatUrl}" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{repo.owner.login}"
+                        android:text="@{pr.user.login}"
                         android:textAppearance="?attr/textAppearanceListItem"
                         tools:text="João Dono" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text='@{Integer.toString(repo.stars)+" stars"}'
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        tools:text="123456 stars" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/text_margin"
-                        android:text='@{Integer.toString(repo.forks)+" forks"}'
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        tools:text="123456 forks" />
-
                 </LinearLayout>
 
             </LinearLayout>

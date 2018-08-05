@@ -20,7 +20,9 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import com.ericmguimaraes.openjavarank.data.database.AppDatabase
 import com.ericmguimaraes.openjavarank.data.network.GithubService
+import com.ericmguimaraes.openjavarank.data.repositories.PullRequestRepository
 import com.ericmguimaraes.openjavarank.data.repositories.RepoRepository
+import com.ericmguimaraes.openjavarank.viewmodels.PullRequestListViewModelFactory
 import com.ericmguimaraes.openjavarank.viewmodels.RepoListViewModelFactory
 
 /**
@@ -33,9 +35,21 @@ object InjectorUtils {
         return RepoListViewModelFactory(repository)
     }
 
+    fun providePullRequestListViewModelFactory(context: Context): ViewModelProvider.Factory? {
+        val repository = getPullRequestRepository(context)
+        return PullRequestListViewModelFactory(repository)
+    }
+
     private fun getRepoRepository(context: Context): RepoRepository {
         return RepoRepository.getInstance(getGithubServicesInstance(),
                 AppDatabase.getInstance(context).repoDao(),
+                provideAppExecutors()
+        )
+    }
+
+    private fun getPullRequestRepository(context: Context): PullRequestRepository {
+        return PullRequestRepository.getInstance(getGithubServicesInstance(),
+                AppDatabase.getInstance(context).pullRequestDao(),
                 provideAppExecutors()
         )
     }
@@ -48,29 +62,4 @@ object InjectorUtils {
         return AppExecutors.instance
     }
 
-    /*
-    private fun getGardenPlantingRepository(context: Context): GardenPlantingRepository {
-        return GardenPlantingRepository.getInstance(
-                AppDatabase.getInstance(context).gardenPlantingDao())
-    }
-
-    fun provideGardenPlantingListViewModelFactory(
-        context: Context
-    ): GardenPlantingListViewModelFactory {
-        val repository = getGardenPlantingRepository(context)
-        return GardenPlantingListViewModelFactory(repository)
-    }
-
-    fun providePlantListViewModelFactory(context: Context): PlantListViewModelFactory {
-        val repository = getPlantRepository(context)
-        return PlantListViewModelFactory(repository)
-    }
-
-    fun providePlantDetailViewModelFactory(
-        context: Context,
-        plantId: String
-    ): PlantDetailViewModelFactory {
-        return PlantDetailViewModelFactory(getPlantRepository(context),
-                getGardenPlantingRepository(context), plantId)
-    }*/
 }

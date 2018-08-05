@@ -22,47 +22,46 @@ import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ericmguimaraes.openjavarank.R
-import com.ericmguimaraes.openjavarank.data.model.Repo
-import com.ericmguimaraes.openjavarank.databinding.FragmentRepoListItemBinding
+import com.ericmguimaraes.openjavarank.data.model.PullRequest
+import com.ericmguimaraes.openjavarank.databinding.FragmentPrListItemBinding
 import com.ericmguimaraes.openjavarank.ui.common.DataBoundListAdapter
 import com.ericmguimaraes.openjavarank.utilities.AppExecutors
 
-class RepoAdapter(
+class PullRequestsAdapter(
         private val dataBindingComponent: DataBindingComponent,
         appExecutors: AppExecutors,
-        private val callback: ((Repo) -> Unit)?
-) : DataBoundListAdapter<Repo, FragmentRepoListItemBinding>(
+        private val callback: ((PullRequest) -> Unit)?
+) : DataBoundListAdapter<PullRequest, FragmentPrListItemBinding>(
         appExecutors = appExecutors,
-        diffCallback = object : DiffUtil.ItemCallback<Repo>() {
-            override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+        diffCallback = object : DiffUtil.ItemCallback<PullRequest>() {
+            override fun areItemsTheSame(oldItem: PullRequest, newItem: PullRequest): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-                return oldItem.stars == newItem.stars
-                        && oldItem.description.equals(newItem.description)
+            override fun areContentsTheSame(oldItem: PullRequest, newItem: PullRequest): Boolean {
+                return oldItem.body == newItem.body
             }
         }
 ) {
 
-    override fun createBinding(parent: ViewGroup): FragmentRepoListItemBinding {
+    override fun createBinding(parent: ViewGroup): FragmentPrListItemBinding {
         val binding = DataBindingUtil
-                .inflate<FragmentRepoListItemBinding>(
+                .inflate<FragmentPrListItemBinding>(
                         LayoutInflater.from(parent.context),
-                        R.layout.fragment_repo_list_item,
+                        R.layout.fragment_pr_list_item,
                         parent,
                         false,
                         dataBindingComponent
                 )
         binding.root.setOnClickListener {
-            binding.repo?.let {
+            binding.pr?.let {
                 callback?.invoke(it)
             }
         }
         return binding
     }
 
-    override fun bind(binding: FragmentRepoListItemBinding, item: Repo) {
-        binding.repo = item
+    override fun bind(binding: FragmentPrListItemBinding, item: PullRequest) {
+        binding.pr = item
     }
 }
