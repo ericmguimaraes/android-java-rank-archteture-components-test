@@ -25,6 +25,10 @@ buildscript {
         runnerVersion = '1.0.1'
         supportLibraryVersion = '28.0.0-beta01'
         workVersion = '1.0.0-alpha04'
+        retrofit_version = '2.4.0'
+        timber_version = '4.5.1'
+        okhttp_interceptor_version = '3.9.0'
+        paging = '1.0.1'
     }
 
     repositories {
