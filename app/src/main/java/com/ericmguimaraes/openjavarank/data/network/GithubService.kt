@@ -2,6 +2,7 @@ package com.ericmguimaraes.openjavarank.data.network
 
 import android.arch.lifecycle.LiveData
 import com.ericmguimaraes.openjavarank.data.model.PullRequest
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -12,7 +13,8 @@ interface GithubService {
     @GET("search/repositories")
     fun getRepos(@Query("q") q: String,
                  @Query("sort") sort: String,
-                 @Query("page") page: Int): LiveData<ApiResponse<RepoResponse>>
+                 @Query("page") page: Int,
+                 @Query("per_page") pageSize: Int): Call<RepoResponse>
 
     @GET("repos/{owner}/{repo}/pulls")
     fun getPullRequests(@Path("owner") owner: String,

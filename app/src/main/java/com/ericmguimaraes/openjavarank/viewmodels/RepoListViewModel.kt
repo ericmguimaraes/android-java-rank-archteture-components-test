@@ -18,6 +18,7 @@ package com.ericmguimaraes.openjavarank.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import android.arch.paging.PagedList
 import com.ericmguimaraes.openjavarank.data.Resource
 import com.ericmguimaraes.openjavarank.data.model.Repo
 import com.ericmguimaraes.openjavarank.data.repositories.RepoRepository
@@ -26,6 +27,6 @@ class RepoListViewModel internal constructor(
         repoRepository: RepoRepository
 ) : ViewModel() {
 
-    val repositories : LiveData<Resource<List<Repo>>> = repoRepository.getRepos()
+    val repositories : LiveData<Resource<LiveData<PagedList<Repo>>>> = repoRepository.getRepos()
 
 }

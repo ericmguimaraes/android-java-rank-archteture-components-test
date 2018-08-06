@@ -46,9 +46,6 @@ class PullRequestFragment : Fragment() {
 
         val repositories = prsViewModel.pulls
         repositories.observe(this, Observer { resource ->
-            Log.e("STATUSRESC", resource?.status?.name)
-            Log.e("STATUSRESC", "${resource?.data?.isEmpty()}")
-            Log.e("STATUSRESC", resource?.data.toString())
             binding.repoResource = resource
             binding.contributorsStatus = resource?.status
         })

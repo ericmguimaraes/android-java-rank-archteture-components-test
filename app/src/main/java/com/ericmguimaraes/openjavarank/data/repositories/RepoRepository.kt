@@ -17,13 +17,13 @@
 package com.ericmguimaraes.openjavarank.data.repositories
 
 import android.arch.lifecycle.LiveData
-import com.ericmguimaraes.openjavarank.data.NetworkBoundResource
+import android.arch.lifecycle.MutableLiveData
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import com.ericmguimaraes.openjavarank.data.Resource
 import com.ericmguimaraes.openjavarank.data.daos.RepoDao
 import com.ericmguimaraes.openjavarank.data.model.Repo
-import com.ericmguimaraes.openjavarank.data.network.ApiResponse
 import com.ericmguimaraes.openjavarank.data.network.GithubService
-import com.ericmguimaraes.openjavarank.data.network.RepoResponse
 import com.ericmguimaraes.openjavarank.utilities.AppExecutors
 
 class RepoRepository private constructor(
@@ -32,27 +32,32 @@ class RepoRepository private constructor(
         private val appExecutors: AppExecutors
 ) {
 
+    private val repoResult = MutableLiveData<Resource<LiveData<PagedList<Repo>>>>()
+    private var data: LiveData<PagedList<Repo>>? = null
+
     // implement getRepos repository
-    fun getRepos(): LiveData<Resource<List<Repo>>> {
-        return object : NetworkBoundResource<List<Repo>, RepoResponse>(appExecutors) {
-            override fun saveCallResult(item: RepoResponse) {
-                repoDao.insertAll(item.items)
-                //todo save page
-            }
+    fun getRepos(): LiveData<Resource<LiveData<PagedList<Repo>>>> {
 
-            override fun shouldFetch(data: List<Repo>?): Boolean {
-                return true //todo melhorar tatica de shouldFetch
-            }
+        // Get data source factory from the local cache
+        val dataSourceFactory = repoDao.getRepos()
 
-            override fun loadFromDb(): LiveData<List<Repo>> {
-                return repoDao.getRepos()
+        // Construct the boundary callback
+        val boundaryCallback = RepoBoundaryCallback(appExecutors, service, repoDao, {
+            if (it) {
+                repoResult.value = Resource.loading(data)
             }
+        }, {
+            repoResult.value = Resource.error("", data)
+        })
 
-            override fun createCall(): LiveData<ApiResponse<RepoResponse>> {
-                //q=language:Java&sort=stars&page=1
-                return service.getRepos("language:Java", "stars", 1)
-            }
-        }.asLiveData()
+        // Get the paged list
+        data = LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE)
+                .setBoundaryCallback(boundaryCallback)
+                .build()
+
+        repoResult.value = Resource.success(data)
+
+        return repoResult
     }
 
     companion object {
@@ -60,6 +65,8 @@ class RepoRepository private constructor(
         // For Singleton instantiation
         @Volatile
         private var instance: RepoRepository? = null
+
+        const val DATABASE_PAGE_SIZE = 50
 
         fun getInstance(service: GithubService, repoDao: RepoDao, appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {

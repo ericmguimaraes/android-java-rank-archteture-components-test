@@ -24,14 +24,14 @@ import android.view.ViewGroup
 import com.ericmguimaraes.openjavarank.R
 import com.ericmguimaraes.openjavarank.data.model.Repo
 import com.ericmguimaraes.openjavarank.databinding.FragmentRepoListItemBinding
-import com.ericmguimaraes.openjavarank.ui.common.DataBoundListAdapter
+import com.ericmguimaraes.openjavarank.ui.common.DataBoundPagedListAdapter
 import com.ericmguimaraes.openjavarank.utilities.AppExecutors
 
 class RepoAdapter(
         private val dataBindingComponent: DataBindingComponent,
         appExecutors: AppExecutors,
         private val callback: ((Repo) -> Unit)?
-) : DataBoundListAdapter<Repo, FragmentRepoListItemBinding>(
+) : DataBoundPagedListAdapter<Repo, FragmentRepoListItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<Repo>() {
             override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
