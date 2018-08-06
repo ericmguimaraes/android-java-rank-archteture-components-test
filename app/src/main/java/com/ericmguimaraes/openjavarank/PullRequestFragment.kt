@@ -9,12 +9,11 @@ import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ericmguimaraes.openjavarank.adapters.PullRequestsAdapter
-import com.ericmguimaraes.openjavarank.binding.FragmentDataBindingComponent
+import com.ericmguimaraes.openjavarank.ui.adapters.PullRequestsAdapter
+import com.ericmguimaraes.openjavarank.ui.binding.FragmentDataBindingComponent
 import com.ericmguimaraes.openjavarank.databinding.FragmentPrListBinding
 import com.ericmguimaraes.openjavarank.utilities.AppExecutors
 import com.ericmguimaraes.openjavarank.utilities.InjectorUtils

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ericmguimaraes.openjavarank.binding
+package com.ericmguimaraes.openjavarank.ui.binding
 
 import android.databinding.BindingAdapter
 import android.support.v4.app.Fragment

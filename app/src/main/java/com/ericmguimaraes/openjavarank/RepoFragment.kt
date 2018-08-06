@@ -11,8 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.ericmguimaraes.openjavarank.adapters.RepoAdapter
-import com.ericmguimaraes.openjavarank.binding.FragmentDataBindingComponent
+import com.ericmguimaraes.openjavarank.ui.adapters.RepoAdapter
+import com.ericmguimaraes.openjavarank.ui.binding.FragmentDataBindingComponent
 import com.ericmguimaraes.openjavarank.databinding.FragmentRepoListBinding
 import com.ericmguimaraes.openjavarank.utilities.AppExecutors
 import com.ericmguimaraes.openjavarank.utilities.InjectorUtils

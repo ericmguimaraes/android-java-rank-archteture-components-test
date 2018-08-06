@@ -19,7 +19,6 @@ package com.ericmguimaraes.openjavarank.viewmodels
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.ericmguimaraes.openjavarank.data.repositories.PullRequestRepository
-import com.ericmguimaraes.openjavarank.data.repositories.RepoRepository
 
 /**
  * Factory for creating a [PullRequestListViewModel] with a constructor that takes a

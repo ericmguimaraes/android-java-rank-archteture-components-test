@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ericmguimaraes.openjavarank.adapters
+package com.ericmguimaraes.openjavarank.ui.adapters
 
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
