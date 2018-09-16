@@ -1,63 +1,45 @@
-## Bem vindo
+# Open Java Rank
 ---
-Obrigado por participar do desafio Android da Tembici! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
+This app shows a list of Java repositories ordered by number of stars. It is a sample for using all the new architecture components and MVVM.
 
-# Criar um aplicativo de consulta a API do [GitHub](https://github.com)#
+### Features
 
-Criar um aplicativo para consultar a [API do GitHub](https://developer.github.com/v3/) e trazer os repositórios mais populares de Java. Basear-se no mockup fornecido:
+* Repository list
+* List of pull requests of a repository
 
-![Screenshot](assets/screenshots/flow.png)
+### Archteture
 
-### **Deve conter** ###
+This project was based on the Google architecture guide and the jetpack components
+https://developer.android.com/jetpack/docs/guide
+https://developer.android.com/jetpack/
 
-- __Lista de repositórios__. Exemplo de chamada na API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1`
-  * Paginação na tela de lista, com endless scroll / scroll infinito (incrementando o parâmetro `page`).
-  * Cada repositório deve exibir Nome do repositório, Descrição do Repositório, Nome / Foto do autor, Número de Stars, Número de Forks
-  * Ao tocar em um item, deve levar a lista de Pull Requests do repositório
-- __Pull Requests de um repositório__. Exemplo de chamada na API: `https://api.github.com/repos/<criador>/<repositório>/pulls`
-  * Cada item da lista deve exibir Nome / Foto do autor do PR, Título do PR, Data do PR e Body do PR
-  * Ao tocar em um item, deve abrir no browser a página do Pull Request em questão
+#### MVVM
+#### Dependency injection
+#### Google - Android Jetpack
+ * ViewModel - arch component
+ * DataBinding
+ * Paging Library
+ * Navigation
+ * LiveData
+ * Room
+ * Kotlin
+#### Third part libraries
+* Glide
+* Gson
+* Retrofit2 - API
+* Timber - Logs
 
-### **A solução DEVE conter** ##
-* Sistema de build Gradle
-* Mapeamento JSON -> Objeto (GSON / Jackson / Moshi / etc)
-* Material Design
+## Contribution
 
-### **Ganha + pontos se conter** ###
+Feel free to open a issue and suggest improvements or open a PR with something relevant
 
-* Framework para comunicação com API
-* Testes no projeto (unitários e por tela)
-* Testes funcionais (que naveguem pelo aplicativo como casos de uso)
-* Cache de imagens e da API
-* Suportar mudanças de orientação das telas sem perder estado
+#### Points to improve
+* UI
+* Add more tests
+* Use Dagger2 to dependency injection
 
-### **Sugestões** ###
+### Ref
+Navigation - https://github.com/googlesamples/android-sunflower
+Architecture - https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
+Paging - https://github.com/googlesamples/android-architecture-components/tree/master/PagingWithNetworkSample/
 
-As sugestões de bibliotecas fornecidas são só um guideline, sintam-se a vontade para usar diferentes e nos surpreenderem. O importante de fato é que os objetivos macros sejam atingidos. =)
-
-* AndroidAnnotations
-* Retrofit | Volley | Spring-Android
-* Picasso | Universal Image Loader | Glide
-* Espresso | Robotium | Robolectric
-
-### **OBS** ###
-
-A foto do mockup é meramente ilustrativa.  
-
-
-### **Processo de submissão** ###
-
-O candidato deverá implementar a solução e enviar um pull request para este repositório com a solução.
-
-O processo de Pull Request funciona da seguinte maneira:
-
-1. Candidato fará um fork desse repositório (não irá clonar direto!)
-2. Fará seu projeto nesse fork.
-3. Commitará e subirá as alterações para o __SEU__ fork.
-4. Pela interface do Bitbucket, irá enviar um Pull Request.
-
-Se possível deixar o fork público para facilitar a inspeção do código.
-
-### **ATENÇÃO** ###
-
-Não se deve tentar fazer o PUSH diretamente para ESTE repositório!
