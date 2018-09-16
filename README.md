@@ -11,7 +11,9 @@ This app shows a list of Java repositories ordered by number of stars. It is a s
 
 This project was based on the Google architecture guide and the jetpack components
 https://developer.android.com/jetpack/docs/guide
+
 https://developer.android.com/jetpack/
+
 
 #### MVVM
 #### Dependency injection
@@ -40,6 +42,8 @@ Feel free to open a issue and suggest improvements or open a PR with something r
 
 ### Ref
 Navigation - https://github.com/googlesamples/android-sunflower
+
 Architecture - https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
+
 Paging - https://github.com/googlesamples/android-architecture-components/tree/master/PagingWithNetworkSample/
 
