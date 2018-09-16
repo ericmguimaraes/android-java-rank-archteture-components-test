@@ -2,12 +2,12 @@
 ---
 This app shows a list of Java repositories ordered by number of stars. It is a sample for using all the new architecture components and MVVM.
 
-### Features
+## Features
 
 * Repository list
 * List of pull requests of a repository
 
-### Archteture
+## Archteture
 
 This project was based on the Google architecture guide and the jetpack components
 https://developer.android.com/jetpack/docs/guide
