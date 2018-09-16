@@ -35,7 +35,7 @@ https://developer.android.com/jetpack/
 
 Feel free to open a issue and suggest improvements or open a PR with something relevant
 
-#### Points to improve
+#### Improvements needed
 * UI
 * Add more tests
 * Use Dagger2 to dependency injection
